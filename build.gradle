@@ -7,6 +7,7 @@ buildscript {
 plugins {
     id 'java'
     id 'scala'
+    id "de.undercouch.download" version "3.1.2"
     id "com.github.maiflai.scalatest" version "0.14"
 }
 
@@ -32,4 +33,23 @@ dependencies{
 
 test {
     maxParallelForks = 1
+}
+
+task getData << {
+    download {
+        src([
+            'http://stat-computing.org/dataexpo/2009/1999.csv.bz2',
+            'http://stat-computing.org/dataexpo/2009/2000.csv.bz2',
+            'http://stat-computing.org/dataexpo/2009/2001.csv.bz2',
+            'http://stat-computing.org/dataexpo/2009/2002.csv.bz2',
+            'http://stat-computing.org/dataexpo/2009/2003.csv.bz2',
+            'http://stat-computing.org/dataexpo/2009/2004.csv.bz2',
+            'http://stat-computing.org/dataexpo/2009/2005.csv.bz2',
+            'http://stat-computing.org/dataexpo/2009/2006.csv.bz2',
+            'http://stat-computing.org/dataexpo/2009/2007.csv.bz2',
+            'http://stat-computing.org/dataexpo/2009/2008.csv.bz2'
+        ])
+        dest "data"
+        overwrite false
+    }
 }
