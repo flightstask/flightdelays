@@ -13,15 +13,15 @@ object BusyAirports extends Job {
 
   def transform(input: DataFrame) = {
     import spark.implicits._
-    val incoming = input.groupBy($"Dest".as("airport")).count
-    val outgoing = input.groupBy($"Origin".as("airport")).count
+    val incoming = input.groupBy($"Dest".as("Airport")).count
+    val outgoing = input.groupBy($"Origin".as("Airport")).count
 
     val countsPerAirport = incoming.unionAll(outgoing)
-      .groupBy($"airport")
-      .agg(sum($"count").as("totalFlights"))
+      .groupBy($"Airport")
+      .agg(sum($"count").as("TotalFlights"))
 
     val busiestAirports = countsPerAirport
-      .orderBy($"totalFlights".desc)
+      .orderBy($"TotalFlights".desc)
       .limit(20)
 
     busiestAirports
