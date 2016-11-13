@@ -89,3 +89,16 @@ task worstDelayRoutes(type: JavaExec) {
         "output/2_delayedRoutes.csv"
     )
 }
+
+task delayProbability(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'org.apache.spark.deploy.SparkSubmit'
+    args(
+        "--master=local[*]",
+        "--class=DelayProbability",
+        "build/libs/plains.jar",
+        "parquet_data",
+        "output/3_delayProbability.csv",
+        project.hasProperty("minCount") ? minCount : 0
+    )
+}

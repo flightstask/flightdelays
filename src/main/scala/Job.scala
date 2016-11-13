@@ -13,7 +13,7 @@ trait Job {
       .getOrCreate()
 
   def saveCSV(input: DataFrame, dest: String) = {
-    input.cache.show()
+    input.cache.show(100, false)
 
     input.write
       .format("com.databricks.spark.csv")

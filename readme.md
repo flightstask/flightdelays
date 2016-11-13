@@ -37,3 +37,26 @@ To find flights you should avoid (with highest number of delays) run:
 
 Since absolute numbers can be missleading (the bigger the airport the more delays), delay ratio normalised by total flights is also included in the result.
 
+To calculate flight delay probabilities split by departure time block and day off week run:
+
+```bash
+./gradlew delayProbability
+```
+
+Where exists routes in the dataset with only one or few fligths within specified time window. In such cases point estimate of delay probability is not relevant. In practice, calculating confidence interval for our probability estimate would help. As a shortcut, I've added optional parameter for this task to specify minimum flight count per group which can be invoked like this:
+
+```bash
+./gradlew delayProbability -PminCount=100
+```
+
+Where were 3452 instances of departure time > 2400 for consistency of data we have removed those as well as rows with unknown arrival delay, departure time or day of week.
+
+All of the jobs above can be run on a cluster environment with the help of spark-submit script.
+
+## Tests
+
+Tests can be run with the usual gradle command:
+
+```bash
+./gradlew test
+```
