@@ -1,0 +1,35 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'java'
+    id 'scala'
+    id "com.github.maiflai.scalatest" version "0.14"
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+ext {
+    sparkVersion = '2.0.1'
+    scalaVersion = '2.11'
+}
+
+dependencies{
+    compile "org.apache.spark:spark-core_${scalaVersion}:${sparkVersion}"
+    compile "org.apache.spark:spark-sql_${scalaVersion}:${sparkVersion}"
+    compile "com.databricks:spark-csv_${scalaVersion}:1.5.0"
+
+    // ScalaTest
+    testCompile "org.scalatest:scalatest_${scalaVersion}:2.2.6"
+    testRuntime 'org.pegdown:pegdown:1.6.0'
+}
+
+test {
+    maxParallelForks = 1
+}

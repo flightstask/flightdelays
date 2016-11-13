@@ -1,0 +1,21 @@
+# Mac
+*.DS_Store
+
+# Gradle
+build/*
+.gradle*
+
+# Ensime
+.ensime*
+
+# Data files
+data
+output
+parquet_data
+
+# Spark
+metastore*
+derby.log
+
+# Other
+notes.org
