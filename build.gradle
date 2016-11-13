@@ -77,3 +77,15 @@ task busyAirports(type: JavaExec) {
         "output/1_busyAirports.csv"
     )
 }
+
+task worstDelayRoutes(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'org.apache.spark.deploy.SparkSubmit'
+    args(
+        "--master=local[*]",
+        "--class=WorstDelayRoutes",
+        "build/libs/plains.jar",
+        "parquet_data",
+        "output/2_delayedRoutes.csv"
+    )
+}

@@ -28,3 +28,12 @@ In order to find the busiest airports run the following command:
 ```
 
 It should print TOP20 busiest airports to console and write output in CSV format to ./output/1_busyAirports.csv file.
+
+To find flights you should avoid (with highest number of delays) run:
+
+```bash
+./gradlew worstDelayRoutes
+```
+
+Since absolute numbers can be missleading (the bigger the airport the more delays), delay ratio normalised by total flights is also included in the result.
+
