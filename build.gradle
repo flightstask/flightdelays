@@ -65,3 +65,15 @@ task convertToParquet(type: JavaExec, dependsOn:[build, getData]) {
         "parquet_data"
     )
 }
+
+task busyAirports(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'org.apache.spark.deploy.SparkSubmit'
+    args(
+        "--master=local[*]",
+        "--class=BusyAirports",
+        "build/libs/plains.jar",
+        "parquet_data",
+        "output/1_busyAirports.csv"
+    )
+}

@@ -18,3 +18,13 @@ Or on a spark cluster using spark-submit script provided by Spark distribution. 
 ```bash
 $SPARK_HOME/bin/spark-submit --master yarn --deploy-mode client --class ConvertToParquet build/libs/plains.jar /path/to/input/csv/files /output/path
 ```
+
+## ETL tasks
+
+In order to find the busiest airports run the following command:
+
+```bash
+./gradlew busyAirports
+```
+
+It should print TOP20 busiest airports to console and write output in CSV format to ./output/1_busyAirports.csv file.
