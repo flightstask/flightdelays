@@ -53,3 +53,15 @@ task getData << {
         overwrite false
     }
 }
+
+task convertToParquet(type: JavaExec, dependsOn:[build, getData]) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'org.apache.spark.deploy.SparkSubmit'
+    args(
+        "--master=local",
+        "--class=ConvertToParquet",
+        "build/libs/plains.jar",
+        "data",
+        "parquet_data"
+    )
+}

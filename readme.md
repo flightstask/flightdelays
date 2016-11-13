@@ -7,4 +7,14 @@ To download data run:
 ./gradlew getData
 ```
 
-No need to unzip CSV files Spark works with bzipped files just fine.
+No need to unzip CSV files Spark works with bzipped files just fine. On the other hand, our data contains a lot of collumns which we will not use. Thus, converting it to Parquet will give us an order of magnitute speedup. Beware, it will take some time to convert the data localy. Conversion can be done with the following command localy:
+
+```bash
+./gradlew convertToParquet
+```
+
+Or on a spark cluster using spark-submit script provided by Spark distribution. For example to submit to YARN based cluster run:
+
+```bash
+$SPARK_HOME/bin/spark-submit --master yarn --deploy-mode client --class ConvertToParquet build/libs/plains.jar /path/to/input/csv/files /output/path
+```
